@@ -12,6 +12,11 @@ import { Toast } from '../../components/ui/Toast';
 import { EmptyState } from '../../components/ui/EmptyState';
 import { useDemoState } from '../../features/demo/demoStorage';
 import { useAuth } from '../../store/AuthContext';
+import {
+  SYNTHETIC_APPLICANTS,
+  SYNTHETIC_WORKERS,
+  SYNTHETIC_ACTIVITY_FEED
+} from '../../features/demo/demoData';
 
 type Applicant = {
   id: number;
@@ -27,29 +32,16 @@ export const CoopOfficerDashboardPage: React.FC = () => {
   const [notice, setNotice] = useState<string | null>(null);
   const [selectedApplicant, setSelectedApplicant] = useState<Applicant | null>(null);
 
-  const [applicants, setApplicants] = useDemoState<Applicant[]>('cooperative-demo-approvals', [
-    {
-      id: 1,
-      name: 'Rahul Menon',
-      skill: 'Plumbing & Maintenance',
-      submitted: 'Today, 9:40 AM',
-      status: 'Pending',
-    },
-    {
-      id: 2,
-      name: 'Divya Krishnan',
-      skill: 'Home Cleaning Specialist',
-      submitted: 'Yesterday',
-      status: 'In review',
-    },
-    {
-      id: 3,
-      name: 'Sanjay Babu',
-      skill: 'Electrical Repair',
-      submitted: 'Apr 12',
-      status: 'Approved',
-    },
-  ]);
+  const [applicants, setApplicants] = useDemoState<Applicant[]>(
+    'cooperative-demo-approvals',
+    SYNTHETIC_APPLICANTS.map((a) => ({
+      id: a.id,
+      name: a.name,
+      skill: a.skill,
+      submitted: a.submitted,
+      status: a.status,
+    }))
+  );
 
   const handleDecision = (id: number, decision: StatusType) => {
     const candidate = applicants.find((a) => a.id === id);
@@ -253,15 +245,11 @@ export const CoopOfficerDashboardPage: React.FC = () => {
               <p className="text-xs text-slate-400">Identity and trade certification audit for registered cooperative workers</p>
             </CardHeader>
             <CardContent className="space-y-4">
-              {[
-                { name: 'Karthik R.', role: 'Electrical Specialist', idNo: 'AADHAAR-8942', status: 'Aadhaar Verified' },
-                { name: 'Muthu S.', role: 'Carpentry Lead', idNo: 'NTUC-CERT-4018', status: 'Certificate Verified' },
-                { name: 'Divya K.', role: 'Cleaning Supervisor', idNo: 'AADHAAR-1049', status: 'Pending Officer Signoff' },
-              ].map((w, i) => (
-                <div key={i} className="p-4 bg-slate-950/60 border border-slate-800 rounded-xl flex items-center justify-between">
+              {SYNTHETIC_WORKERS.slice(0, 6).map((w) => (
+                <div key={w.id} className="p-4 bg-[#1C1C1F] border border-[#2A2A2E] rounded-xl flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-bold text-white">{w.name} • {w.role}</p>
-                    <p className="text-xs text-slate-400 mt-0.5">Verification Doc: {w.idNo}</p>
+                    <p className="text-sm font-bold text-white">{w.name} • {w.service}</p>
+                    <p className="text-xs text-slate-400 mt-0.5">Verification Doc: TN-GOVT-CERT-{w.id * 89}</p>
                   </div>
                   <Button variant="outline" size="sm" onClick={() => setNotice(`Doc inspection file opened for ${w.name}.`)}>
                     Inspect File
@@ -282,15 +270,11 @@ export const CoopOfficerDashboardPage: React.FC = () => {
               <p className="text-xs text-slate-400">Real-time event stream for Chennai City Labour Cooperative</p>
             </CardHeader>
             <CardContent className="space-y-4">
-              {[
-                { event: 'Worker Onboarded', detail: 'Sanjay Babu approved for Electrical Repair dispatch pool.', time: '2 hours ago' },
-                { event: '18 Service Visits Completed', detail: 'Dispatched across Chennai Central today with 100% completion.', time: '4 hours ago' },
-                { event: 'Monthly Payout Distributed', detail: '₹1.84L net revenue distributed to cooperative member accounts.', time: 'Yesterday' },
-              ].map((ev, i) => (
-                <div key={i} className="p-4 bg-slate-950/60 border border-slate-800 rounded-xl flex items-start gap-3">
+              {SYNTHETIC_ACTIVITY_FEED.map((ev) => (
+                <div key={ev.id} className="p-4 bg-[#1C1C1F] border border-[#2A2A2E] rounded-xl flex items-start gap-3">
                   <Activity className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
                   <div>
-                    <p className="text-xs font-bold text-white">{ev.event}</p>
+                    <p className="text-xs font-bold text-white">{ev.title}</p>
                     <p className="text-xs text-slate-400 mt-0.5">{ev.detail}</p>
                     <p className="text-[11px] text-slate-500 mt-1">{ev.time}</p>
                   </div>

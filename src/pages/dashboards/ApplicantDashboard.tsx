@@ -12,6 +12,7 @@ import { Modal } from '../../components/ui/Modal';
 import { Toast } from '../../components/ui/Toast';
 import { useDemoState } from '../../features/demo/demoStorage';
 import { useAuth } from '../../store/AuthContext';
+import { SYNTHETIC_OPPORTUNITIES } from '../../features/demo/demoData';
 
 type StoredApplication = {
   status: StatusType;
@@ -29,22 +30,17 @@ export const ApplicantDashboardPage: React.FC = () => {
     { status: 'Pending', applied: [] }
   );
 
-  const opportunities = [
-    {
-      title: 'Home maintenance specialist',
-      coop: 'Chennai City Labour Cooperative',
-      area: 'T. Nagar, Chennai',
-      pay: '₹18,000–24,000 / month',
-      icon: Wrench,
-    },
-    {
-      title: 'Community cleaning crew',
-      coop: 'South Chennai Workers Federation',
-      area: 'Adyar, Chennai',
-      pay: '₹15,000–20,000 / month',
-      icon: Sparkles,
-    },
-  ];
+  const opportunities = SYNTHETIC_OPPORTUNITIES.map((opp) => ({
+    title: opp.title,
+    coop: opp.coop,
+    area: opp.area,
+    pay: opp.pay,
+    icon: opp.title.toLowerCase().includes('clean')
+      ? Sparkles
+      : opp.title.toLowerCase().includes('ac')
+      ? ShieldCheck
+      : Wrench,
+  }));
 
   const applyForOpportunity = (title: string) => {
     setApplicationState((current) => ({

@@ -13,6 +13,10 @@ import { Toast } from '../../components/ui/Toast';
 import { EmptyState } from '../../components/ui/EmptyState';
 import { useDemoState } from '../../features/demo/demoStorage';
 import { useAuth } from '../../store/AuthContext';
+import {
+  SYNTHETIC_BOOKINGS,
+  SYNTHETIC_WORKERS
+} from '../../features/demo/demoData';
 
 type StoredBooking = {
   id: number;
@@ -30,60 +34,30 @@ export const CustomerDashboardPage: React.FC = () => {
   const [notice, setNotice] = useState<string | null>(null);
   const [selectedWorker, setSelectedWorker] = useState<{ name: string; service: string } | null>(null);
 
-  const [bookings, setBookings] = useDemoState<StoredBooking[]>('cooperative-demo-bookings', [
-    {
-      id: 1,
-      service: 'Electrical inspection',
-      worker: 'Anil Kumar',
-      time: 'Tomorrow • 10:00 AM',
-      area: 'T. Nagar, Chennai',
-      status: 'Scheduled',
-    },
-    {
-      id: 2,
-      service: 'Kitchen deep clean',
-      worker: 'Meera S.',
-      time: 'Fri, 18 Apr • 2:30 PM',
-      area: 'Adyar, Chennai',
-      status: 'Pending',
-    },
-  ]);
+  const [bookings, setBookings] = useDemoState<StoredBooking[]>(
+    'cooperative-demo-bookings',
+    SYNTHETIC_BOOKINGS.map((b) => ({
+      id: b.id,
+      service: b.service,
+      worker: b.worker,
+      time: b.time,
+      area: b.area,
+      status: b.status,
+    }))
+  );
 
-  const workers = [
-    {
-      name: 'Anil Kumar',
-      service: 'Electrical Repair',
-      rating: '4.9',
-      area: 'T. Nagar',
-      availability: 'Available' as StatusType,
-      initials: 'AK',
-      tone: 'bg-slate-800 text-slate-200 border-slate-700',
-      coop: 'Chennai City Labour Cooperative',
-      price: '₹500 / hr',
-    },
-    {
-      name: 'Meera S.',
-      service: 'Home Cleaning',
-      rating: '4.8',
-      area: 'Adyar',
-      availability: 'Available' as StatusType,
-      initials: 'MS',
-      tone: 'bg-slate-800 text-slate-200 border-slate-700',
-      coop: 'South Chennai Workers Federation',
-      price: '₹400 / hr',
-    },
-    {
-      name: 'Ravi Prakash',
-      service: 'Plumbing',
-      rating: '4.7',
-      area: 'Anna Nagar',
-      availability: 'Offline' as StatusType,
-      initials: 'RP',
-      tone: 'bg-slate-800 text-slate-200 border-slate-700',
-      coop: 'Chennai City Labour Cooperative',
-      price: '₹500 / hr',
-    },
-  ];
+  const workers = SYNTHETIC_WORKERS.map((w) => ({
+    name: w.name,
+    service: w.service,
+    rating: w.rating,
+    area: `${w.area}, ${w.city}`,
+    availability: w.availability,
+    initials: w.initials,
+    tone: 'bg-[#1C1C1F] text-[#F5F5F4] border-[#2A2A2E]',
+    coop: w.cooperative,
+    price: w.price,
+    skills: w.skills,
+  }));
 
   const categories = [
     { label: 'Electrical Repair', icon: Wrench },
@@ -91,6 +65,7 @@ export const CustomerDashboardPage: React.FC = () => {
     { label: 'Home Cleaning', icon: Sparkles },
     { label: 'Appliance Repair', icon: Refrigerator },
     { label: 'Carpentry', icon: Hammer },
+    { label: 'AC Service', icon: Wrench },
   ];
 
   const filteredWorkers = workers.filter((worker) =>

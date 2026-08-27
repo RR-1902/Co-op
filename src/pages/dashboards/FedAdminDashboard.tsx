@@ -10,6 +10,12 @@ import { Card, CardHeader, CardContent } from '../../components/ui/Card';
 import { Modal } from '../../components/ui/Modal';
 import { Toast } from '../../components/ui/Toast';
 import { useAuth } from '../../store/AuthContext';
+import {
+  SYNTHETIC_COOPERATIVES,
+  SYNTHETIC_WORKERS,
+  SYNTHETIC_APPLICANTS,
+  SYNTHETIC_ACTIVITY_FEED
+} from '../../features/demo/demoData';
 
 type CooperativeItem = {
   name: string;
@@ -29,29 +35,15 @@ export const FedAdminDashboardPage: React.FC = () => {
   const [coopName, setCoopName] = useState('');
   const [coopLocation, setCoopLocation] = useState('');
 
-  const [cooperatives, setCooperatives] = useState<CooperativeItem[]>([
-    {
-      name: 'Chennai City Labour Cooperative',
-      location: 'Chennai, Tamil Nadu',
-      workers: 42,
-      jobs: 286,
-      status: 'Available',
-    },
-    {
-      name: 'South Chennai Workers Federation',
-      location: 'Chennai, Tamil Nadu',
-      workers: 28,
-      jobs: 174,
-      status: 'Available',
-    },
-    {
-      name: 'Madurai Services Cooperative',
-      location: 'Madurai, Tamil Nadu',
-      workers: 19,
-      jobs: 98,
-      status: 'Offline',
-    },
-  ]);
+  const [cooperatives, setCooperatives] = useState<CooperativeItem[]>(
+    SYNTHETIC_COOPERATIVES.map((c) => ({
+      name: c.name,
+      location: `${c.city}, Tamil Nadu`,
+      workers: c.workersCount,
+      jobs: c.completedJobsCount,
+      status: c.status,
+    }))
+  );
 
   const handleAddCooperative = () => {
     if (!coopName || !coopLocation) return;
@@ -267,18 +259,14 @@ export const FedAdminDashboardPage: React.FC = () => {
           <Card>
             <CardHeader>
               <h3 className="text-base font-heading font-bold text-white">Federation Network Worker Pool</h3>
-              <p className="text-xs text-slate-400">Directory of 248 verified worker members registered across affiliated entities</p>
+              <p className="text-xs text-slate-400">Directory of verified worker members registered across affiliated entities</p>
             </CardHeader>
             <CardContent className="space-y-3">
-              {[
-                { name: 'Anil Kumar', coop: 'Chennai City Labour Cooperative', skill: 'Electrical Specialist', rating: '4.9 ★' },
-                { name: 'Sanjay Babu', coop: 'Chennai City Labour Cooperative', skill: 'Electrical Repair', rating: '5.0 ★' },
-                { name: 'Karthik R.', coop: 'South Chennai Workers Federation', skill: 'Carpentry Lead', rating: '4.8 ★' },
-              ].map((w, i) => (
-                <div key={i} className="p-3.5 bg-slate-950/60 border border-slate-800 rounded-xl flex items-center justify-between text-xs">
+              {SYNTHETIC_WORKERS.map((w) => (
+                <div key={w.id} className="p-3.5 bg-[#1C1C1F] border border-[#2A2A2E] rounded-xl flex items-center justify-between text-xs">
                   <div>
-                    <p className="font-bold text-white">{w.name} • <span className="text-amber-400">{w.rating}</span></p>
-                    <p className="text-slate-400 mt-0.5">{w.skill} • {w.coop}</p>
+                    <p className="font-bold text-white">{w.name} • <span className="text-[#E8934A]">{w.rating} ★</span></p>
+                    <p className="text-slate-400 mt-0.5">{w.service} • {w.cooperative} ({w.area})</p>
                   </div>
                   <Button variant="outline" size="sm" onClick={() => setNotice(`Worker profile file opened for ${w.name}.`)}>
                     Profile
@@ -296,19 +284,16 @@ export const FedAdminDashboardPage: React.FC = () => {
           <Card>
             <CardHeader>
               <h3 className="text-base font-heading font-bold text-white">Federation Onboarding Applications Queue</h3>
-              <p className="text-xs text-slate-400">36 pending applications across 4 Southern regional cooperatives</p>
+              <p className="text-xs text-slate-400">Pending applications across regional cooperatives</p>
             </CardHeader>
             <CardContent className="space-y-3">
-              {[
-                { ref: '#APP-2048', applicant: 'Rahul Menon', coop: 'Chennai City Labour Cooperative', status: 'Pending Review' },
-                { ref: '#APP-2049', applicant: 'Divya Krishnan', coop: 'South Chennai Workers Federation', status: 'In Review' },
-              ].map((app, i) => (
-                <div key={i} className="p-4 bg-slate-950/60 border border-slate-800 rounded-xl flex items-center justify-between text-xs">
+              {SYNTHETIC_APPLICANTS.map((app) => (
+                <div key={app.id} className="p-4 bg-[#1C1C1F] border border-[#2A2A2E] rounded-xl flex items-center justify-between text-xs">
                   <div>
-                    <p className="font-bold text-white">{app.applicant} ({app.ref})</p>
-                    <p className="text-slate-400 mt-0.5">{app.coop}</p>
+                    <p className="font-bold text-white">{app.name} (#APP-{app.id})</p>
+                    <p className="text-slate-400 mt-0.5">{app.skill} • {app.cooperative}</p>
                   </div>
-                  <Badge status="Pending" />
+                  <Badge status={app.status} />
                 </div>
               ))}
             </CardContent>
@@ -325,15 +310,11 @@ export const FedAdminDashboardPage: React.FC = () => {
               <p className="text-xs text-slate-400">System events recorded across all affiliated entities</p>
             </CardHeader>
             <CardContent className="space-y-4 text-xs text-slate-300">
-              {[
-                { event: 'Cooperative Entity Registered', detail: 'Coimbatore Artisans Labour Cooperative registered in federation directory.', time: '1 hour ago' },
-                { event: 'Madurai Cooperative Sync', detail: 'Madurai Services Cooperative completed quarterly worker audit.', time: '3 hours ago' },
-                { event: 'Service Volume Milestone', detail: '1,842 service visits completed across network in April.', time: 'Yesterday' },
-              ].map((item, i) => (
-                <div key={i} className="p-4 bg-slate-950/60 border border-slate-800 rounded-xl flex items-start gap-3">
+              {SYNTHETIC_ACTIVITY_FEED.map((item) => (
+                <div key={item.id} className="p-4 bg-[#1C1C1F] border border-[#2A2A2E] rounded-xl flex items-start gap-3">
                   <Building2 className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-bold text-white">{item.event}</p>
+                    <p className="font-bold text-white">{item.title}</p>
                     <p className="text-slate-400 mt-0.5">{item.detail}</p>
                     <p className="text-[11px] text-slate-500 mt-1">{item.time}</p>
                   </div>

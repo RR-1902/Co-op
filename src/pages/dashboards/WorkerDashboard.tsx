@@ -10,6 +10,7 @@ import { Card, CardHeader, CardContent } from '../../components/ui/Card';
 import { Toast } from '../../components/ui/Toast';
 import { useDemoState } from '../../features/demo/demoStorage';
 import { useAuth } from '../../store/AuthContext';
+import { SYNTHETIC_WORKER_JOBS } from '../../features/demo/demoData';
 
 type Job = {
   id: number;
@@ -28,35 +29,18 @@ export const WorkerDashboardPage: React.FC = () => {
 
   const [available, setAvailable] = useDemoState<boolean>('cooperative-demo-availability', true);
 
-  const [jobs, setJobs] = useDemoState<Job[]>('cooperative-demo-jobs', [
-    {
-      id: 1,
-      service: 'Electrical inspection',
-      customer: 'S. Narayanan',
-      time: 'Today • 10:00 AM',
-      area: 'T. Nagar, Chennai',
-      amount: '₹850',
-      status: 'Scheduled',
-    },
-    {
-      id: 2,
-      service: 'Ceiling fan repair',
-      customer: 'Kavya R.',
-      time: 'Today • 3:30 PM',
-      area: 'Adyar, Chennai',
-      amount: '₹650',
-      status: 'Pending',
-    },
-    {
-      id: 3,
-      service: 'Wiring replacement',
-      customer: 'Arun M.',
-      time: 'Tomorrow • 11:00 AM',
-      area: 'Velachery, Chennai',
-      amount: '₹1,200',
-      status: 'Scheduled',
-    },
-  ]);
+  const [jobs, setJobs] = useDemoState<Job[]>(
+    'cooperative-demo-jobs',
+    SYNTHETIC_WORKER_JOBS.map((j) => ({
+      id: j.id,
+      service: j.service,
+      customer: j.customer,
+      time: j.time,
+      area: j.area,
+      amount: j.amount,
+      status: j.status,
+    }))
+  );
 
   const updateJobStatus = (id: number, newStatus: StatusType) => {
     const targetJob = jobs.find((j) => j.id === id);
