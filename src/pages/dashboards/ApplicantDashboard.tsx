@@ -12,7 +12,6 @@ import { Card, CardHeader, CardContent } from '../../components/ui/Card';
 import { Modal } from '../../components/ui/Modal';
 import { Toast } from '../../components/ui/Toast';
 import { useDemoState } from '../../features/demo/demoStorage';
-import { useAuth } from '../../store/AuthContext';
 import { SYNTHETIC_OPPORTUNITIES } from '../../features/demo/demoData';
 
 type StoredApplication = {
@@ -21,7 +20,6 @@ type StoredApplication = {
 };
 
 export const ApplicantDashboardPage: React.FC = () => {
-  const { profile } = useAuth();
   const [activeSection, setActiveSection] = useState('Overview');
   const [notice, setNotice] = useState<string | null>(null);
   const [detailsOpen, setDetailsOpen] = useState(false);
@@ -53,20 +51,20 @@ export const ApplicantDashboardPage: React.FC = () => {
 
   const sectionHeader: Record<string, { title: string; subtitle: string }> = {
     'Overview': {
-      title: `Applicant Portal • ${profile?.name ?? 'Rahul'}`,
-      subtitle: 'Track your cooperative onboarding progress, document verification, and matched role opportunities.',
+      title: 'Your path to cooperative work',
+      subtitle: 'Track your onboarding progress, document verification, and matched role opportunities.',
     },
     'My Applications': {
-      title: 'My Applications & Status',
-      subtitle: 'View submitted applications, review stage timelines, and inspection status.',
+      title: 'Submitted applications',
+      subtitle: 'View submitted applications and review stage timelines.',
     },
     'Opportunities': {
-      title: 'Matched Cooperative Opportunities',
-      subtitle: 'Explore open cooperative roles tailored to your verified skills and preferred region.',
+      title: 'Matched cooperative roles',
+      subtitle: 'Explore open cooperative roles tailored to your verified skills.',
     },
     'Profile & Compliance': {
-      title: 'Profile & Compliance Verification',
-      subtitle: 'Manage required identity documents, background verification, and skill certifications.',
+      title: 'Document verification',
+      subtitle: 'Manage required identity documents and skill certifications.',
     },
   };
 

@@ -12,7 +12,6 @@ import { Modal } from '../../components/ui/Modal';
 import { Toast } from '../../components/ui/Toast';
 import { EmptyState } from '../../components/ui/EmptyState';
 import { useDemoState } from '../../features/demo/demoStorage';
-import { useAuth } from '../../store/AuthContext';
 import {
   SYNTHETIC_BOOKINGS,
   SYNTHETIC_WORKERS
@@ -28,7 +27,6 @@ type StoredBooking = {
 };
 
 export const CustomerDashboardPage: React.FC = () => {
-  const { profile } = useAuth();
   const [activeSection, setActiveSection] = useState('Overview');
   const [query, setQuery] = useState('');
   const [notice, setNotice] = useState<string | null>(null);
@@ -97,20 +95,20 @@ export const CustomerDashboardPage: React.FC = () => {
   // Header Titles Mapping
   const sectionHeader: Record<string, { title: string; subtitle: string }> = {
     'Overview': {
-      title: `Welcome back, ${profile?.name?.split(' ')[0] ?? 'Customer'}`,
-      subtitle: 'Find and book trusted, verified cooperative workers in your area.',
+      title: 'Find trusted local services',
+      subtitle: 'Book verified cooperative workers directly in your area.',
     },
     'Browse Services': {
-      title: 'Browse & Filter Cooperative Services',
-      subtitle: 'Search cooperative skills, browse categories, and dispatch verified workers.',
+      title: 'Cooperative service catalog',
+      subtitle: 'Search skills, filter categories, and dispatch verified workers.',
     },
     'My Bookings': {
-      title: 'My Bookings & Dispatches',
-      subtitle: 'Manage active service requests, view scheduled visits, and track dispatch status.',
+      title: 'Active bookings & dispatches',
+      subtitle: 'Track scheduled visits, manage requests, and view dispatch history.',
     },
     'Activity': {
-      title: 'Customer Activity Log',
-      subtitle: 'Real-time audit trail of service requests, worker dispatches, and completed payouts.',
+      title: 'Service activity audit',
+      subtitle: 'Real-time audit trail of bookings, dispatches, and completions.',
     },
   };
 
@@ -202,13 +200,13 @@ export const CustomerDashboardPage: React.FC = () => {
                     setQuery(label);
                     setActiveSection('Browse Services');
                   }}
-                  className="p-4 rounded-2xl border text-left bg-slate-900/80 border-slate-800 hover:border-slate-700 text-slate-300 transition-all duration-200"
+                  className="p-4 rounded-2xl border text-left bg-[#1C1C1F] border-[#2A2A2E] hover:border-[#E8934A]/40 text-[#F5F5F4] transition-all duration-200 cursor-pointer"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 text-slate-300 flex items-center justify-center mb-3">
+                  <div className="w-10 h-10 rounded-xl bg-[#141416] border border-[#2A2A2E] text-[#E8934A] flex items-center justify-center mb-3">
                     <Icon className="w-5 h-5" />
                   </div>
-                  <p className="text-sm font-semibold text-white">{label}</p>
-                  <p className="text-xs text-slate-400 mt-0.5">From ₹400 / hr</p>
+                  <p className="text-sm font-bold text-[#F5F5F4]">{label}</p>
+                  <p className="text-xs text-[#9B9B9F] mt-0.5 font-medium">Verified workers</p>
                 </button>
               ))}
             </div>

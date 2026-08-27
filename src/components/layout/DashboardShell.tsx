@@ -244,16 +244,15 @@ export const DashboardShell: FC<DashboardShellProps> = ({
         {/* Main Content Area */}
         <div className="flex-1 min-w-0 flex flex-col">
           {/* Top Bar Header */}
-          <header className="hidden md:flex h-20 items-center justify-between px-8 border-b border-[#2A2A2E] bg-[#141416]/80 backdrop-blur-md">
+          <header className="hidden md:flex h-16 items-center justify-between px-8 border-b border-[#2A2A2E] bg-[#141416]/90 backdrop-blur-md">
             <div>
               <p className="text-xs text-[#9B9B9F] font-semibold tracking-wide uppercase">{roleLabels[role]}</p>
-              <h2 className="text-lg font-heading font-bold text-[#F5F5F4]">{title}</h2>
             </div>
 
             <div className="flex items-center gap-4">
               <Badge status="Available" />
               
-              <div className="h-6 w-px bg-[#2A2A2E]" />
+              <div className="h-5 w-px bg-[#2A2A2E]" />
 
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-full bg-[#1C1C1F] border border-[#2A2A2E] text-[#F5F5F4] font-bold text-xs flex items-center justify-center">
@@ -261,14 +260,14 @@ export const DashboardShell: FC<DashboardShellProps> = ({
                 </div>
                 <div className="hidden lg:block text-left">
                   <p className="text-xs font-semibold text-[#F5F5F4]">{profile?.name}</p>
-                  <p className="text-[11px] text-[#9B9B9F]">{profile?.email}</p>
+                  <p className="text-[11px] text-[#9B9B9F] font-medium">{profile?.email}</p>
                 </div>
               </div>
 
               <button
                 type="button"
                 onClick={signOut}
-                className="p-2 text-[#9B9B9F] hover:text-[#F87171] hover:bg-[#1C1C1F] rounded-xl transition-colors"
+                className="p-2 text-[#9B9B9F] hover:text-[#F87171] hover:bg-[#1C1C1F] rounded-xl transition-colors cursor-pointer"
                 title="Sign Out"
               >
                 <LogOut className="w-4 h-4" />
@@ -277,12 +276,12 @@ export const DashboardShell: FC<DashboardShellProps> = ({
           </header>
 
           {/* Page Content Body */}
-          <main className="flex-1 p-4 sm:p-8 max-w-7xl w-full mx-auto">
+          <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto">
             <div className="mb-6">
               <h1 className="text-2xl sm:text-3xl font-heading font-extrabold text-[#F5F5F4] tracking-tight">
                 {currentSection === 'Settings' ? 'Account & Portal Settings' : title}
               </h1>
-              <p className="text-sm text-[#9B9B9F] mt-1">
+              <p className="text-sm text-[#9B9B9F] font-normal mt-1 leading-relaxed">
                 {currentSection === 'Settings'
                   ? 'Manage your profile info, security credentials, and notification preferences.'
                   : subtitle}

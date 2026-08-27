@@ -9,7 +9,6 @@ import { Button } from '../../components/ui/Button';
 import { Card, CardHeader, CardContent } from '../../components/ui/Card';
 import { Modal } from '../../components/ui/Modal';
 import { Toast } from '../../components/ui/Toast';
-import { useAuth } from '../../store/AuthContext';
 import {
   SYNTHETIC_COOPERATIVES,
   SYNTHETIC_WORKERS,
@@ -26,7 +25,6 @@ type CooperativeItem = {
 };
 
 export const FedAdminDashboardPage: React.FC = () => {
-  const { profile } = useAuth();
   const [activeSection, setActiveSection] = useState('Overview');
   const [notice, setNotice] = useState<string | null>(null);
   const [selectedCoop, setSelectedCoop] = useState<CooperativeItem | null>(null);
@@ -63,24 +61,24 @@ export const FedAdminDashboardPage: React.FC = () => {
 
   const sectionHeader: Record<string, { title: string; subtitle: string }> = {
     'Overview': {
-      title: `Federation Intelligence • ${profile?.name ?? 'Admin'}`,
-      subtitle: 'Federation-wide network monitoring across all affiliated labour cooperatives.',
+      title: 'Network overview',
+      subtitle: 'Federation-wide network metrics across all affiliated labour cooperatives.',
     },
     'Cooperatives': {
-      title: 'Affiliated Labour Cooperatives',
-      subtitle: 'Manage registered member cooperatives, geographic coverage, and operational status.',
+      title: 'Affiliated cooperatives',
+      subtitle: 'Registered member cooperatives and geographic coverage.',
     },
     'Workers': {
-      title: 'Federation Worker Pool Directory',
-      subtitle: 'Comprehensive directory of active worker members across all regional cooperatives.',
+      title: 'Federation worker pool',
+      subtitle: 'Directory of verified worker members across all cooperatives.',
     },
     'Applications': {
-      title: 'Federation Onboarding Applications',
-      subtitle: 'Track worker application volume and pending officer reviews across all entities.',
+      title: 'Network onboarding queue',
+      subtitle: 'Worker application volume across all entities.',
     },
     'Activity': {
-      title: 'Federation Audit Feed & Events',
-      subtitle: 'System-wide audit trail of entity registrations, payouts, and dispatch milestones.',
+      title: 'Federation audit feed',
+      subtitle: 'System-wide audit trail of entity registrations and volume milestones.',
     },
   };
 
@@ -158,7 +156,7 @@ export const FedAdminDashboardPage: React.FC = () => {
               <Card className="overflow-hidden">
                 <div className="overflow-x-auto">
                   <table className="w-full text-left text-xs">
-                    <thead className="bg-slate-950/80 border-b border-slate-800 text-slate-400 uppercase tracking-wider font-semibold">
+                    <thead className="bg-[#141416] border-b border-[#2A2A2E] text-[#9B9B9F] uppercase tracking-wider font-semibold">
                       <tr>
                         <th className="p-4">Cooperative Name</th>
                         <th className="p-4">Active Workers</th>
@@ -167,20 +165,20 @@ export const FedAdminDashboardPage: React.FC = () => {
                         <th className="p-4 text-right">Inspect</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-slate-800/80 text-slate-300">
+                    <tbody className="divide-y divide-[#2A2A2E] text-[#F5F5F4]">
                       {cooperatives.map((coop) => (
-                        <tr key={coop.name} className="hover:bg-slate-800/40 transition-colors">
-                          <td className="p-4 font-semibold text-white">
+                        <tr key={coop.name} className="hover:bg-[#1C1C1F]/60 transition-colors">
+                          <td className="p-4 font-semibold text-[#F5F5F4]">
                             <div>
                               <span>{coop.name}</span>
-                              <p className="text-[11px] text-slate-400 font-normal flex items-center gap-1 mt-0.5">
-                                <MapPin className="w-3 h-3 text-slate-400" />
+                              <p className="text-[11px] text-[#9B9B9F] font-normal flex items-center gap-1 mt-0.5">
+                                <MapPin className="w-3 h-3 text-[#9B9B9F]" />
                                 {coop.location}
                               </p>
                             </div>
                           </td>
-                          <td className="p-4 font-bold text-slate-200">{coop.workers}</td>
-                          <td className="p-4 font-bold text-slate-200">{coop.jobs}</td>
+                          <td className="p-4 font-bold text-[#F5F5F4] tabular-nums">{coop.workers}</td>
+                          <td className="p-4 font-bold text-[#F5F5F4] tabular-nums">{coop.jobs}</td>
                           <td className="p-4">
                             <Badge status={coop.status} size="sm" />
                           </td>

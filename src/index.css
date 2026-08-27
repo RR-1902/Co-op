@@ -133,3 +133,32 @@
   color: inherit;
 }
 
+/* CO-OP Typography Hierarchy System */
+.type-display {
+  @apply font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#F5F5F4] tracking-tight;
+}
+
+.type-heading-1 {
+  @apply font-heading text-2xl sm:text-3xl font-bold text-[#F5F5F4] tracking-tight;
+}
+
+.type-heading-2 {
+  @apply font-heading text-lg sm:text-xl font-bold text-[#F5F5F4] tracking-tight;
+}
+
+.type-subheading {
+  @apply text-sm text-[#9B9B9F] font-normal leading-relaxed;
+}
+
+.type-body {
+  @apply text-sm text-[#F5F5F4] font-normal leading-normal;
+}
+
+.type-metadata {
+  @apply text-xs text-[#9B9B9F] font-medium;
+}
+
+.type-metric {
+  @apply font-heading text-3xl sm:text-4xl font-extrabold text-[#F5F5F4] tabular-nums tracking-tight;
+}
+

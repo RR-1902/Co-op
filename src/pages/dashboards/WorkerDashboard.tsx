@@ -56,24 +56,24 @@ export const WorkerDashboardPage: React.FC = () => {
 
   const sectionHeader: Record<string, { title: string; subtitle: string }> = {
     'Overview': {
-      title: `Worker Hub • ${profile?.name ?? 'Anil Kumar'}`,
-      subtitle: 'Manage your daily visits, accept customer requests, and toggle availability.',
+      title: "Today's work",
+      subtitle: 'Manage daily visits, accept customer requests, and update availability.',
     },
     'My Jobs': {
-      title: 'My Visits Agenda & Jobs',
-      subtitle: 'View scheduled customer visits, accept new requests, and complete assigned tasks.',
+      title: 'Assigned visits & schedule',
+      subtitle: 'View scheduled customer visits and update job progression.',
     },
     'Earnings': {
-      title: 'Earnings & Payouts',
-      subtitle: 'Track net earnings, member fee contributions, and cooperative welfare distribution.',
+      title: 'Earnings & payouts',
+      subtitle: 'Track net earnings, member fee contributions, and welfare payouts.',
     },
     'Availability': {
-      title: 'Availability & Dispatch Status',
-      subtitle: 'Manage live job matching readiness and service area preferences.',
+      title: 'Worker availability settings',
+      subtitle: 'Toggle your real-time dispatch status for local customer requests.',
     },
     'Profile': {
-      title: 'Worker Member Profile',
-      subtitle: 'Verified credentials, cooperative entity membership, and customer rating.',
+      title: 'Worker member profile',
+      subtitle: 'Verified trade credentials, cooperative affiliation, and rating history.',
     },
   };
 
@@ -183,14 +183,14 @@ export const WorkerDashboardPage: React.FC = () => {
                           </p>
                         </div>
                         <div className="text-right">
-                          <span className="text-lg font-bold text-emerald-400">{job.amount}</span>
-                          <p className="text-xs text-slate-400 flex items-center gap-1 mt-0.5 justify-end">
-                            <Clock3 className="w-3.5 h-3.5 text-slate-400" />
+                          <span className="text-lg font-bold text-[#4ADE80] tabular-nums">{job.amount}</span>
+                          <p className="text-xs text-[#9B9B9F] flex items-center gap-1 mt-0.5 justify-end font-medium">
+                            <Clock3 className="w-3.5 h-3.5 text-[#9B9B9F]" />
                             {job.time}
                           </p>
                         </div>
                       </div>
-                      <div className="mt-4 pt-3 border-t border-slate-800 flex items-center justify-end gap-3">
+                      <div className="mt-4 pt-3 border-t border-[#2A2A2E] flex items-center justify-end gap-3">
                         {job.status === 'Pending' && (
                           <Button variant="primary" size="sm" icon={Check} onClick={() => updateJobStatus(job.id, 'Accepted')}>
                             Accept Visit

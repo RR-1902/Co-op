@@ -11,7 +11,6 @@ import { Modal } from '../../components/ui/Modal';
 import { Toast } from '../../components/ui/Toast';
 import { EmptyState } from '../../components/ui/EmptyState';
 import { useDemoState } from '../../features/demo/demoStorage';
-import { useAuth } from '../../store/AuthContext';
 import {
   SYNTHETIC_APPLICANTS,
   SYNTHETIC_WORKERS,
@@ -27,7 +26,6 @@ type Applicant = {
 };
 
 export const CoopOfficerDashboardPage: React.FC = () => {
-  const { profile } = useAuth();
   const [activeSection, setActiveSection] = useState('Overview');
   const [notice, setNotice] = useState<string | null>(null);
   const [selectedApplicant, setSelectedApplicant] = useState<Applicant | null>(null);
@@ -59,19 +57,19 @@ export const CoopOfficerDashboardPage: React.FC = () => {
 
   const sectionHeader: Record<string, { title: string; subtitle: string }> = {
     'Overview': {
-      title: `Cooperative Admin • ${profile?.name ?? 'Meera S.'}`,
-      subtitle: 'Chennai City Labour Cooperative • Review worker applications and verify credentials.',
+      title: 'Cooperative operations',
+      subtitle: 'Workforce management and candidate review for Chennai City Labour Cooperative.',
     },
     'Applications': {
-      title: 'Worker Application Queue',
-      subtitle: 'Review pending worker registrations, inspect qualifications, and approve onboarding.',
+      title: 'Worker application queue',
+      subtitle: 'Review candidate applications and approve onboarding.',
     },
     'Worker Verification': {
-      title: 'Worker Identity & Document Verification',
-      subtitle: 'Verify Aadhaar identity, NTUC trade certificates, and regional compliance.',
+      title: 'Credentials & document verification',
+      subtitle: 'Audit Aadhaar identity and trade certifications.',
     },
     'Cooperative Activity': {
-      title: 'Cooperative Operational Activity Log',
+      title: 'Operational audit log',
       subtitle: 'Real-time dispatch log, service completions, and member activity.',
     },
   };
