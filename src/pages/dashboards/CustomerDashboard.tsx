@@ -147,6 +147,7 @@ export const CustomerDashboardPage: React.FC = () => {
           {/* Key Stats Row */}
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
             <ProgressMetricCard
+              size="sm"
               title="Active Bookings"
               value={bookings.filter((b) => b.status !== 'Completed').length}
               trend={{ value: 'Scheduled', isPositive: true }}
@@ -156,6 +157,7 @@ export const CustomerDashboardPage: React.FC = () => {
               chartColor="amber"
             />
             <ProgressMetricCard
+              size="sm"
               title="Services Completed"
               value="12"
               trend={{ value: '+2 this month', isPositive: true }}
@@ -165,6 +167,7 @@ export const CustomerDashboardPage: React.FC = () => {
               chartColor="emerald"
             />
             <ProgressMetricCard
+              size="sm"
               title="Trusted Workers"
               value="4"
               trend={{ value: 'Verified', isPositive: true }}
@@ -174,6 +177,7 @@ export const CustomerDashboardPage: React.FC = () => {
               chartColor="amber"
             />
             <ProgressMetricCard
+              size="sm"
               title="Member Benefit"
               value="5%"
               trend={{ value: 'Active', isPositive: true }}

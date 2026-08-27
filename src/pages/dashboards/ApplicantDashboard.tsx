@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import {
-  FileCheck2, ShieldCheck, BriefcaseBusiness, UserCheck, CheckCircle2,
+  FileCheck2, ShieldCheck, BriefcaseBusiness, CheckCircle2,
   AlertCircle, ArrowUpRight, Wrench, Sparkles
 } from 'lucide-react';
 import { DashboardShell } from '../../components/layout/DashboardShell';
 import { StatCard } from '../../components/ui/StatCard';
+import { ProgressMetricCard } from '../../components/ui/ProgressMetricCard';
 import { Badge, type StatusType } from '../../components/ui/Badge';
 import { Button } from '../../components/ui/Button';
 import { Card, CardHeader, CardContent } from '../../components/ui/Card';
@@ -84,7 +85,7 @@ export const ApplicantDashboardPage: React.FC = () => {
       {activeSection === 'Overview' && (
         <div className="space-y-8">
           {/* Stats Bar */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
             <StatCard
               label="Application Status"
               value={applicationState.status}
@@ -92,16 +93,19 @@ export const ApplicantDashboardPage: React.FC = () => {
               icon={FileCheck2}
               tone="amber"
             />
-            <StatCard
-              label="Profile Completion"
-              value="82%"
-              detail="Address proof required"
-              icon={UserCheck}
-              tone="slate"
+            <ProgressMetricCard
+              size="sm"
+              title="Profile & Skill Completion"
+              value="85%"
+              trend={{ value: '+15%', isPositive: true }}
+              subDetail="Verification in progress"
+              statsSummary={{ peak: '100%', low: '40%', avg: '80%' }}
+              chartData={[40, 55, 65, 70, 80, 85]}
+              chartColor="emerald"
             />
             <StatCard
               label="Matched Opportunities"
-              value="8"
+              value={SYNTHETIC_OPPORTUNITIES.length}
               detail="Based on skill profile"
               icon={BriefcaseBusiness}
               tone="slate"
@@ -109,7 +113,7 @@ export const ApplicantDashboardPage: React.FC = () => {
             <StatCard
               label="Verified Documents"
               value="4 / 5"
-              detail="2 awaiting review"
+              detail="1 awaiting officer review"
               icon={ShieldCheck}
               tone="emerald"
             />

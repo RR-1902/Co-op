@@ -20,6 +20,7 @@ export interface ProgressMetricCardProps {
   };
   chartData?: number[];
   chartColor?: 'amber' | 'emerald' | 'rose' | 'neutral';
+  size?: 'sm' | 'md' | 'lg';
   isLoading?: boolean;
   isEmpty?: boolean;
   className?: string;
@@ -36,6 +37,7 @@ export const ProgressMetricCard: React.FC<ProgressMetricCardProps> = ({
   statsSummary,
   chartData = [14, 18, 16, 22, 26, 21, 30, 28, 34, 32, 40],
   chartColor = 'amber',
+  size = 'md',
   isLoading = false,
   isEmpty = false,
   className = '',
@@ -172,9 +174,13 @@ export const ProgressMetricCard: React.FC<ProgressMetricCardProps> = ({
     );
   }
 
+  const paddingClass = size === 'sm' ? 'p-4' : size === 'lg' ? 'p-8' : 'p-6';
+  const valueTextClass = size === 'sm' ? 'text-2xl font-extrabold' : size === 'lg' ? 'text-4xl sm:text-5xl font-extrabold' : 'text-3xl sm:text-4xl font-extrabold';
+  const sparklineHeightClass = size === 'sm' ? 'h-10' : size === 'lg' ? 'h-24' : 'h-14';
+
   return (
     <div
-      className={`p-6 bg-[#1C1C1F] border border-[#2A2A2E] rounded-[28px] shadow-lg hover:border-[#2A2A2E]/90 transition-all duration-300 flex flex-col justify-between select-none ${className}`}
+      className={`${paddingClass} bg-[#1C1C1F] border border-[#2A2A2E] rounded-[28px] shadow-lg hover:border-[#2A2A2E]/90 transition-all duration-300 flex flex-col justify-between select-none ${className}`}
     >
       {/* 1. HEADER */}
       <div className="flex items-center justify-between gap-2 mb-3">
@@ -229,13 +235,13 @@ export const ProgressMetricCard: React.FC<ProgressMetricCardProps> = ({
       <div className="grid grid-cols-12 gap-3 items-center my-2">
         {/* Large Tabular Metric Value */}
         <div className="col-span-6 sm:col-span-5 min-w-0">
-          <p className="text-3xl sm:text-4xl font-heading font-extrabold tracking-tight text-[#F5F5F4] tabular-nums truncate">
+          <p className={`${valueTextClass} font-heading tracking-tight text-[#F5F5F4] tabular-nums truncate`}>
             {value}
           </p>
         </div>
 
         {/* Right Sparkline Chart Area with Dot Grid */}
-        <div className="col-span-6 sm:col-span-7 h-14 relative rounded-xl overflow-hidden bg-[#141416]/40 border border-[#2A2A2E]/40 p-1">
+        <div className={`col-span-6 sm:col-span-7 ${sparklineHeightClass} relative rounded-xl overflow-hidden bg-[#141416]/40 border border-[#2A2A2E]/40 p-1`}>
           {renderSparkline(chartData)}
         </div>
       </div>

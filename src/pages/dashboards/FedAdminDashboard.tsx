@@ -97,42 +97,48 @@ export const FedAdminDashboardPage: React.FC = () => {
 
       {/* SECTION: OVERVIEW */}
       {activeSection === 'Overview' && (
-        <div className="space-y-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+        <div className="space-y-8">          {/* HERO LARGE METRIC CARD (Federation Network Scalability Story) */}
+          <ProgressMetricCard
+            size="lg"
+            title="Federation Network Volume & Revenue"
+            value="₹15,85,000"
+            trend={{ value: '+18.4% YOY', isPositive: true }}
+            subDetail="Combined gross monthly service volume across 5 Tamil Nadu regional cooperatives"
+            statsSummary={{ peak: '₹17.2L', low: '₹9.4L', avg: '₹13.6L' }}
+            chartData={[940000, 1080000, 1220000, 1380000, 1490000, 1585000]}
+            chartColor="amber"
+          />
+
+          {/* 3-COLUMN METRIC ROW */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <ProgressMetricCard
-              title="Affiliated Cooperatives"
-              value={12 + (cooperatives.length - 3)}
-              trend={{ value: '+2 new', isPositive: true }}
-              subDetail="Across 4 Southern States"
-              statsSummary={{ peak: 15, low: 8, avg: 11 }}
-              chartData={[8, 9, 10, 11, 12, 13, 12 + (cooperatives.length - 3)]}
-              chartColor="amber"
-            />
-            <ProgressMetricCard
-              title="Network Workers"
-              value="248"
-              trend={{ value: '+9.2%', isPositive: true }}
-              subDetail="Active verified members"
-              statsSummary={{ peak: 260, low: 190, avg: 224 }}
-              chartData={[190, 205, 215, 228, 235, 242, 248]}
+              size="md"
+              title="Total Network Workers"
+              value="171"
+              trend={{ value: '+14.2%', isPositive: true }}
+              subDetail="Active verified members in network"
+              statsSummary={{ peak: 180, low: 120, avg: 154 }}
+              chartData={[120, 134, 145, 158, 164, 171]}
               chartColor="emerald"
             />
             <ProgressMetricCard
-              title="Pending Applications"
-              value="36"
-              trend={{ value: '8 urgent', isNegative: true }}
-              subDetail="Officer queue reviews"
-              statsSummary={{ peak: 42, low: 18, avg: 28 }}
-              chartData={[20, 24, 30, 28, 35, 32, 36]}
+              size="md"
+              title="Completed Services"
+              value="1,115"
+              trend={{ value: '+15.8%', isPositive: true }}
+              subDetail="Verified service visits to date"
+              statsSummary={{ peak: 1200, low: 800, avg: 980 }}
+              chartData={[800, 890, 960, 1020, 1080, 1115]}
               chartColor="amber"
             />
             <ProgressMetricCard
-              title="Completed Services"
-              value="1,842"
-              trend={{ value: '+15.8%', isPositive: true }}
-              subDetail="April to date • ₹8.42L"
-              statsSummary={{ peak: 1950, low: 1400, avg: 1680 }}
-              chartData={[1400, 1520, 1610, 1700, 1780, 1842]}
+              size="md"
+              title="Pending Applications Queue"
+              value="10"
+              trend={{ value: 'In Review', isPositive: true }}
+              subDetail="Officer onboarding queue reviews"
+              statsSummary={{ peak: 18, low: 4, avg: 11 }}
+              chartData={[8, 12, 9, 14, 11, 10]}
               chartColor="neutral"
             />
           </div>
