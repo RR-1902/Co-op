@@ -309,9 +309,18 @@ export const FedAdminDashboardPage: React.FC = () => {
       {activeSection === 'Activity' && (
         <div className="space-y-6">
           <Card>
-            <CardHeader>
-              <h3 className="text-base font-heading font-bold text-white">Federation Audit Trail & Feed</h3>
-              <p className="text-xs text-slate-400">System events recorded across all affiliated entities</p>
+            <CardHeader className="flex items-center justify-between">
+              <div>
+                <h3 className="text-base font-heading font-bold text-white">Federation Audit Log & Event Stream</h3>
+                <p className="text-xs text-slate-400">System-wide audit trail of entity registrations and volume milestones</p>
+              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => window.location.href = '/under-construction?feature=Network+Intelligence+Report'}
+              >
+                Export Audit Report
+              </Button>
             </CardHeader>
             <CardContent className="space-y-4 text-xs text-slate-300">
               {SYNTHETIC_ACTIVITY_FEED.map((item) => (

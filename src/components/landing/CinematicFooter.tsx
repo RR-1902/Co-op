@@ -173,10 +173,26 @@ export const CinematicFooter: React.FC<CinematicFooterProps> = () => {
 
         {/* Bottom Bar */}
         <div className="w-full border-t border-[#2A2A2E]/80 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#9B9B9F]">
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center justify-center gap-2">
             <span className="font-semibold text-[#F5F5F4]">© 2026 CO-OP</span>
             <span className="text-[#2A2A2E]">•</span>
-            <span>Labour Cooperative Marketplace</span>
+            <a
+              href="/under-construction?feature=Privacy+Policy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#F5F5F4] transition-colors"
+            >
+              Privacy Policy
+            </a>
+            <span className="text-[#2A2A2E]">•</span>
+            <a
+              href="/under-construction?feature=Terms+of+Service"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#F5F5F4] transition-colors"
+            >
+              Terms of Service
+            </a>
           </div>
 
           <p className="font-medium text-[#9B9B9F]/80 text-center">

@@ -354,7 +354,7 @@ export const ApplicantDashboardPage: React.FC = () => {
                 variant="primary"
                 size="sm"
                 className="w-full"
-                onClick={() => setNotice('Document upload system ready. Please select utility bill PDF or image.')}
+                onClick={() => window.location.href = '/under-construction?feature=Address+Proof+Document+Upload'}
               >
                 Upload Address Proof Document
               </Button>

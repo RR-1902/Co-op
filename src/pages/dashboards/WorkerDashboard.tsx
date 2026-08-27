@@ -302,8 +302,15 @@ export const WorkerDashboardPage: React.FC = () => {
           </div>
 
           <Card>
-            <CardHeader>
+            <CardHeader className="flex items-center justify-between">
               <h3 className="text-base font-heading font-bold text-white">Monthly Earnings Distribution</h3>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => window.location.href = '/under-construction?feature=Tax+and+Payout+Statements'}
+              >
+                Export Payout Statement
+              </Button>
             </CardHeader>
             <CardContent>
               <div className="flex h-36 items-end gap-3 pt-4">

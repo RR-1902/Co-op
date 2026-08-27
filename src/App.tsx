@@ -4,6 +4,7 @@ import { ProtectedRoute } from './components/layout/ProtectedRoute';
 import Login from './features/auth/Login';
 import Register from './features/auth/Register';
 import { LandingPage } from './pages/LandingPage';
+import { UnderConstructionPage } from './pages/UnderConstructionPage';
 import {
   CustomerDashboard,
   ApplicantDashboard,
@@ -18,6 +19,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/under-construction" element={<UnderConstructionPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 

@@ -263,9 +263,18 @@ export const CoopOfficerDashboardPage: React.FC = () => {
       {activeSection === 'Cooperative Activity' && (
         <div className="space-y-6">
           <Card>
-            <CardHeader>
-              <h3 className="text-base font-heading font-bold text-white">Cooperative Activity & Audit Feed</h3>
-              <p className="text-xs text-slate-400">Real-time event stream for Chennai City Labour Cooperative</p>
+            <CardHeader className="flex items-center justify-between">
+              <div>
+                <h3 className="text-base font-heading font-bold text-white">Cooperative Activity Stream</h3>
+                <p className="text-xs text-slate-400">Live operational dispatch events and member status updates</p>
+              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => window.location.href = '/under-construction?feature=Operational+Audit+Export'}
+              >
+                Export Audit Feed
+              </Button>
             </CardHeader>
             <CardContent className="space-y-4">
               {SYNTHETIC_ACTIVITY_FEED.map((ev) => (
